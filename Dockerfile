@@ -2,9 +2,9 @@ FROM alpine:latest
 
 RUN apk add --no-cache curl jq
 
-COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
+COPY entrypoint /
+ENTRYPOINT ["/entrypoint"]
 
-HEALTHCHECK --interval=15s CMD /entrypoint.sh healthcheck
+HEALTHCHECK --interval=15s CMD /entrypoint healthcheck
 
 CMD ["watchdog"]
