@@ -1,5 +1,6 @@
-# Simple watchdog for Docker - a Docker image
-A simple watchdog container to automatically restart unhealthy containers.
+# Watchdog for Docker
+
+Watchdog for Docker is a simple watchdog container to automatically restart unhealthy containers.
 
 
 ### v0.0.1beta (2020-08-10)
