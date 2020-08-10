@@ -32,4 +32,4 @@ SOFTWARE.
 
 ## Credits
 
-Inspired by ***
+Inspired by https://github.com/willfarrell/docker-autoheal
