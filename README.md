@@ -1,4 +1,4 @@
-# docker-watchdog
+# Simple watchdog for Docker - a Docker image
 A simple watchdog container to automatically restart unhealthy containers.
 
 
