@@ -2,6 +2,11 @@
 
 Watchdog for Docker is a Docker image which provides a simple watchdog to automatically restart unhealthy containers.
 
+### Environment variables
+
+|ENV|Default|Description|
+|---|---|---|
+
 
 ### v0.0.1beta (2020-08-10)
 * project started / initial release
