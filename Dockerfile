@@ -14,7 +14,7 @@ RUN chmod +x /opt/scripts/entrypoint.sh
 
 # Healthcheck
 HEALTHCHECK --interval=15s --timeout=5s --retries=5 \
-    CMD ["/bin/bash", "-c", "/opt/scripts/entrypoint.sh healthcheck"]
+    CMD ["/bin/sh", "-c", "/opt/scripts/entrypoint.sh healthcheck"]
 
 # Run entrypoint-script
-ENTRYPOINT ["/bin/bash", "-c", "/opt/scripts/entrypoint.sh watchdog"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/scripts/entrypoint.sh watchdog"]
