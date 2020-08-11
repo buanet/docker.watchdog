@@ -18,12 +18,7 @@ docker_curl() {
 
 trap 'kill ${!}; term_handler' SIGTERM
 
-if [ "$1" = 'healthcheck' ]; then
-  docker_curl --fail http://localhost/_ping
-  exit $?
-fi
-
-if [ "$1" = 'watchdog' ] && [ -e ${DOCKER_SOCK} ]; then
+if [ -e ${DOCKER_SOCK} ]; then
 
   # https://docs.docker.com/engine/api/v1.25/
 
