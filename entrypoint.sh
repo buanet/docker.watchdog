@@ -1,22 +1,36 @@
 #!/bin/sh
 
-set -e
-set -o pipefail
+# set -e
+# set -o pipefail
 
 DOCKER_SOCK=${DOCKER_SOCK:-/var/run/docker.sock}
 CURL_TIMEOUT=${CURL_TIMEOUT:-30}
 
-# SIGTERM-handler
-term_handler() {
-  exit 143; # 128 + 15 -- SIGTERM
-}
+# # SIGTERM-handler
+# term_handler() {
+#   exit 143; # 128 + 15 -- SIGTERM
+# }
 
 docker_curl() {
   curl --max-time "${CURL_TIMEOUT}" --no-buffer -s --unix-socket "${DOCKER_SOCK}" "$@" || return 1
   return 0
 }
 
-trap 'kill ${!}; term_handler' SIGTERM
+# trap 'kill ${!}; term_handler' SIGTERM
+
+# Function for graceful shutdown by SIGTERM signal
+shut_down() {
+  echo ' '
+  echo "Recived termination signal (SIGTERM)."
+  echo "Shutting down watchdog..."
+  pid=$(ps -ef | awk '/entrypoint.sh/{print $1}')
+  kill -SIGTERM "$pid"
+  exit
+}
+
+# Trap to get signal for graceful shutdown
+trap 'shut_down' SIGTERM
+
 
 if [ -e ${DOCKER_SOCK} ]; then
 
