@@ -6,13 +6,13 @@ manifests:
       architecture: amd64
       os: linux
   -
-    image: buanet/watchdog:$VERSION-arm64v8
+    image: buanet/watchdog:$VERSION-aarch64
     platform:
       architecture: arm64
       variant: v8
       os: linux
   -
-    image: buanet/watchdog:$VERSION-arm32v7
+    image: buanet/watchdog:$VERSION-armv7hf
     platform:
       architecture: arm
       variant: v7
