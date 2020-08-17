@@ -30,25 +30,25 @@ jobs:
         - JOB_NAME="Build images"
       script:
         #- sed -i "s/\$VERSION/${VERSION}/g" $ARCH/scripts/iobroker_startup.sh
-        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./
+        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./amd64
 
     - stage: Build images
       env:
-        - ARCH=aarch64
+        - ARCH=arm64v8
         - JOB_NAME="Build images"
       script:
         - docker run --rm --privileged multiarch/qemu-user-static:register --reset
         #- sed -i "s/\$VERSION/${VERSION}/g" $ARCH/scripts/iobroker_startup.sh
-        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./
+        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./arm64v8
 
     - stage: Build images
       env:
-        - ARCH=armv7hf
+        - ARCH=arm32v7
         - JOB_NAME="Build images"
       script:
         - docker run --rm --privileged multiarch/qemu-user-static:register --reset
         #- sed -i "s/\$VERSION/${VERSION}/g" $ARCH/scripts/iobroker_startup.sh
-        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./
+        - docker build -t "buanet/watchdog:$VERSION-$ARCH" ./arm32v7
 
     - stage: Manifest
       env:
