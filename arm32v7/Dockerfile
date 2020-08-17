@@ -1,4 +1,5 @@
-FROM arm32v7/debian:buster-slim
+FROM balenalib/armv7hf-debian:buster
+#FROM arm32v7/debian:buster-slim
 
 LABEL maintainer="Andre Germann" \
       url="https://buanet.de"
