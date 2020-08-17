@@ -3,7 +3,7 @@ FROM arm32v7/alpine:latest
 LABEL maintainer="Andre Germann" \
       url="https://buanet.de"
 
-# Install prerequisites
+# Install prerequisites 
 RUN apk add --no-cache curl jq nano tzdata
 
 # Create scripts directorys and copy scripts
