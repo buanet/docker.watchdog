@@ -1,4 +1,4 @@
-FROM arm32v7/alpine:latest
+FROM arm64v8/debian:buster-slim
 
 LABEL maintainer="Andre Germann" \
       url="https://buanet.de"

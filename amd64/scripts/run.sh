@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DOCKER_SOCK=${DOCKER_SOCK:-/var/run/docker.sock}
 CURL_TIMEOUT=${CURL_TIMEOUT:-30}

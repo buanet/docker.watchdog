@@ -1,10 +1,14 @@
-FROM alpine:latest
+FROM debian:buster-slim
 
 LABEL maintainer="Andre Germann" \
       url="https://buanet.de"
 
 # Install prerequisites
-RUN apk add --no-cache curl jq nano tzdata
+RUN apt-get update && apt-get install -y \
+    curl \
+    jq \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create scripts directorys and copy scripts
 RUN mkdir -p /opt/scripts/
@@ -17,7 +21,7 @@ ENV TZ="Europe/Berlin"
 
 # Healthcheck
 HEALTHCHECK --interval=15s --timeout=5s --retries=5 \
-    CMD ["/bin/sh", "-c", "/opt/scripts/healthcheck.sh"]
+    CMD ["/bin/bash", "-c", "/opt/scripts/healthcheck.sh"]
 
 # Run entrypoint-script
-ENTRYPOINT ["/bin/sh", "-c", "/opt/scripts/run.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "/opt/scripts/run.sh"]
