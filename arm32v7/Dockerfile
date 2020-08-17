@@ -4,6 +4,7 @@ LABEL maintainer="Andre Germann" \
       url="https://buanet.de"
 
 # Install prerequisites
+RUN uname -m
 RUN apk add --no-cache curl jq nano tzdata
 
 # Create scripts directorys and copy scripts
