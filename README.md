@@ -24,7 +24,7 @@ docker run \
     --restart=always \
     -e WATCHDOG_CONTAINER_LABEL=all" \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    buanet/watchdog:beta
+    buanet/watchdog:latest
 ```
 
 ### Running with docker-compose
@@ -37,7 +37,7 @@ version: '2'
 services:
   watchdog:
     container_name: watchdog
-    image: buanet/watchdog:beta
+    image: buanet/watchdog:latest
     hostname: watchdog
     restart: always
     environment:
@@ -79,11 +79,13 @@ Thank you!
 
 ## Changelog
 
-### v0.0.2beta (2020-08-17)
-* switched base image to balenalib alpine
-* added multiarch support for arm32v7, arm64v8 and amd64
-* added automated building of images
-* added documentation
+### v1.0.0 (2020-08-18)
+* pushing beta to first stable release
+* v0.0.2beta (2020-08-17)
+  * switched base image to balenalib alpine
+  * added multiarch support for arm32v7, arm64v8 and amd64
+  * added automated building of images
+  * added documentation
 * v0.0.1beta (2020-08-10)
   * project started / initial release
 
