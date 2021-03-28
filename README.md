@@ -1,12 +1,12 @@
 # Watchdog for Docker
 
-[![Release](https://img.shields.io/github/v/release/buanet/docker-watchdog)](https://github.com/buanet/docker-watchdog/releases)
-[![Build Status](https://travis-ci.org/buanet/docker-watchdog.svg?branch=master)](https://travis-ci.org/buanet/docker-watchdog)<br>
-[![Image Size](https://img.shields.io/docker/image-size/buanet/watchdog)](https://hub.docker.com/repository/docker/buanet/watchdog)
+[![Source](https://img.shields.io/badge/source-github-blue)](https://github.com/buanet/docker.watchdog)
+[![Release](https://img.shields.io/github/v/release/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/releases)
+[![Github Issues](https://img.shields.io/github/issues/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/issues)<br>
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/buanet/watchdog/latest)](https://hub.docker.com/repository/docker/buanet/watchdog)
 [![Docker Pulls](https://img.shields.io/docker/pulls/buanet/watchdog)](https://hub.docker.com/repository/docker/buanet/watchdog)
 [![Docker Stars](https://img.shields.io/docker/stars/buanet/watchdog)](https://hub.docker.com/repository/docker/buanet/watchdog)<br>
-[![Source](https://img.shields.io/badge/source-github-blue)](https://github.com/buanet/docker-watchdog)
-[![License](https://img.shields.io/github/license/buanet/docker-watchdog)](https://github.com/buanet/docker-watchdog/blob/master/LICENSE.md)
+[![License](https://img.shields.io/github/license/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/blob/master/LICENSE.md)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue)](https://paypal.me/buanet)
 
 Watchdog for Docker is a Docker image which provides (at the moment) just a simple watchdog to automatically restart unhealthy containers. Some more functions to monitor your containers will follow.
