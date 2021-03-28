@@ -22,7 +22,7 @@ docker run \
     -d \
     --name watchdog \
     --restart=always \
-    -e WATCHDOG_CONTAINER_LABEL=all" \
+    -e WATCHDOG_CONTAINER_LABEL=all \
     -v /var/run/docker.sock:/var/run/docker.sock \
     buanet/watchdog:latest
 ```
