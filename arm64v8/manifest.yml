@@ -1,0 +1,8 @@
+image: buanet/watchdog:$VERSION-arm64v8
+manifests:
+  -
+    image: buanet/watchdog:$VERSION-arm64v8
+    platform:
+      architecture: arm64
+      variant: v8
+      os: linux
