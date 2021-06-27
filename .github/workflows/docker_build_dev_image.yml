@@ -64,7 +64,7 @@ jobs:
         with:
           context: ./arm32v7
           file: ./arm32v7/Dockerfile
-          push: false
+          push: true
           platforms: linux/arm/v7
           tags: buanet/watchdog:testing
           
