@@ -56,6 +56,7 @@ jobs:
           context: ./amd64
           file: ./amd64/Dockerfile
           push: false
+          load: true
           platforms: linux/amd64
           tags: buanet/watchdog:testing-amd64
           
@@ -65,6 +66,7 @@ jobs:
           context: ./arm32v7
           file: ./arm32v7/Dockerfile
           push: false
+          load: true
           platforms: linux/arm/v7
           tags: buanet/watchdog:testing-arm32v7
       
@@ -74,6 +76,7 @@ jobs:
           context: ./arm64v8
           file: ./arm64v8/Dockerfile
           push: false
+          load: true
           platforms: linux/arm64
           tags: buanet/watchdog:testing-arm64v8
           
