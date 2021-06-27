@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           context: ./amd64
-          file: ./Dockerfile
+          file: ./amd64/Dockerfile
           push: false
           platforms: linux/amd64
           tags: buanet/watchdog:testing
@@ -63,7 +63,7 @@ jobs:
         uses: docker/build-push-action@v2.5.0
         with:
           context: ./arm32v7
-          file: ./Dockerfile
+          file: ./arm32v7/Dockerfile
           push: false
           platforms: linux/arm/v7
           tags: buanet/watchdog:testing
