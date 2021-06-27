@@ -53,16 +53,16 @@ jobs:
       - name: Build Docker image (amd64)
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./amd64/
+          context: ./amd64
           file: ./Dockerfile
           push: false
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64
           tags: buanet/watchdog:testing
           
       - name: Build Docker image (armv7)
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./arm32v7/
+          context: ./arm32v7
           file: ./Dockerfile
           push: false
           platforms: linux/arm/v7
