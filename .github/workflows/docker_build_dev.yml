@@ -7,3 +7,36 @@ on:
     branches:
       - dev
       
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing
+        run: |
+        echo "Setting variables..."
+        VERSION="$(cat .VERSION)"
+        MAJORVERSION="$(cat .VERSION | cut -c 1-2 | sed -r 's#^(.{0})#\1latest-#')"
+        echo "This is the Version: $VERSION"
+        echo "This is the Major Version: $MAJORVERSION"
+
+      - name: Setup Manifest Tool
+        run: |
+          wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64 -O manifest-tool
+          chmod +x manifest-tool
+
+
+
+#      - name: Docker Setup Buildx
+#        uses: docker/setup-buildx-action@v1.3.0
+
+#      - name: Docker Login
+#        uses: docker/login-action@v1.10.0
+#        with:
+#          username: ${{ secrets.DOCKER_USER }}
+#          password: ${{ secrets.DOCKER_PASS }}
+
+#      - name: Build and push Docker images
+#        uses: docker/build-push-action@v2.5.0
+#        with:
+#          context: ./amd64/
+#          file: ./Dockerfile
