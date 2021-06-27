@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Testing
         run: |
-        echo "Setting variables..."
-        VERSION="$(cat .VERSION)"
-        MAJORVERSION="$(cat .VERSION | cut -c 1-2 | sed -r 's#^(.{0})#\1latest-#')"
-        echo "This is the Version: $VERSION"
-        echo "This is the Major Version: $MAJORVERSION"
+          echo: "Some testing..."
+          VERSION="$(cat .VERSION)"
+          MAJORVERSION="$(cat .VERSION | cut -c 1-2 | sed -r 's#^(.{0})#\1latest-#')"
+          echo "This is the Version: $VERSION"
+          echo "This is the Major Version: $MAJORVERSION"
 
       - name: Setup Manifest Tool
         run: |
