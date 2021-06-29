@@ -44,11 +44,17 @@ jobs:
           echo "Flags:     ${{ steps.buildx.outputs.flags }}"
           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
 
-      - name: Login to DockerHub
+ #     - name: Login to DockerHub
+ #       uses: docker/login-action@v1.10.0
+ #       with:
+ #         username: ${{ secrets.DOCKER_USER }}
+ #         password: ${{ secrets.DOCKER_PASS }}
+          
+      - name: Login to GithubRegistry
         uses: docker/login-action@v1.10.0
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASS }}
+          username: ${{ secrets.PACKAGES_USER }}
+          password: ${{ secrets.PACKAGES_PASS }}
 
       - name: Build Docker image (amd64)
         uses: docker/build-push-action@v2.5.0
@@ -79,6 +85,12 @@ jobs:
           load: true
           platforms: linux/arm64
           tags: buanet/watchdog:testing-arm64v8
+          
+      - name: Manifests
+        run: |
+          cat .manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_buanet.yaml
+          cat manifest_buanet.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_buanet_testing.yaml
+          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_buanet_testing.yaml
           
       - name: Log
         run: docker images
