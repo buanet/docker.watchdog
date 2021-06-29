@@ -62,7 +62,7 @@ jobs:
         with:
           context: ./amd64
           file: ./amd64/Dockerfile
-          push: false
+          push: true
           load: true
           platforms: linux/amd64
           tags: buanet/watchdog:testing-amd64
@@ -72,7 +72,7 @@ jobs:
         with:
           context: ./arm32v7
           file: ./arm32v7/Dockerfile
-          push: false
+          push: true
           load: true
           platforms: linux/arm/v7
           tags: buanet/watchdog:testing-arm32v7
@@ -82,14 +82,14 @@ jobs:
         with:
           context: ./arm64v8
           file: ./arm64v8/Dockerfile
-          push: false
+          push: true
           load: true
           platforms: linux/arm64
           tags: buanet/watchdog:testing-arm64v8
           
       - name: Manifests
         run: |
-          cat .manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_buanet.yaml
+          cat ./manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_buanet.yaml
           cat manifest_buanet.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_buanet_testing.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_buanet_testing.yaml
           
