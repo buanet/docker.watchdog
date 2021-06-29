@@ -89,6 +89,7 @@ jobs:
           
       - name: Manifests
         run: |
+          ls -al
           cat ./manifest_test.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
           cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_testing.yaml
