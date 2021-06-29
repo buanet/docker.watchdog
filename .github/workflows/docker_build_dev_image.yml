@@ -65,7 +65,7 @@ jobs:
           push: true
           load: false
           platforms: linux/amd64
-          tags: ghcr.io/buanet/watchdog:testing-amd64
+          tags: ghcr.io/buanet/docker.watchdog:testing-amd64
           
       - name: Build Docker image (armv32v7)
         uses: docker/build-push-action@v2.5.0
@@ -75,7 +75,7 @@ jobs:
           push: true
           load: false
           platforms: linux/arm/v7
-          tags: ghcr.io/buanet/watchdog:testing-arm32v7
+          tags: ghcr.io/buanet/docker.watchdog:testing-arm32v7
       
       - name: Build Docker image (arm64v8)
         uses: docker/build-push-action@v2.5.0
@@ -85,12 +85,12 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: ghcr.io/buanet/watchdog:testing-arm64v8
+          tags: ghcr.io/buanet/docker.watchdog:testing-arm64v8
           
       - name: Manifests
         run: |
-          cat manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
-          cat manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
+          cat ./manifest_test.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
+          cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_testing.yaml
           
       - name: Log
