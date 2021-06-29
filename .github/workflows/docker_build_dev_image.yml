@@ -89,9 +89,9 @@ jobs:
           
       - name: Manifests
         run: |
-          cat ./manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_buanet.yaml
-          cat manifest_buanet.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_buanet_testing.yaml
-          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_buanet_testing.yaml
+          cat manifest_github.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
+          cat manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
+          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_testing.yaml
           
       - name: Log
         run: docker images
