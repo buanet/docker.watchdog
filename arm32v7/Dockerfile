@@ -1,7 +1,6 @@
 FROM balenalib/armv7hf-alpine:latest
 
-LABEL maintainer="Andre Germann" \
-      url="https://buanet.de"
+LABEL org.opencontainers.image.source https://github.com/buanet/docker.watchdog
 
 # Install prerequisites
 RUN apk add --no-cache curl jq nano tzdata
