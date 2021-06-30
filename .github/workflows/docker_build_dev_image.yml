@@ -1,6 +1,6 @@
-# Github action to build Docker image (testing-tag) from dev branch
+# Github action to build Docker image from dev branch (tag: testing)
 
-name: Docker build dev
+name: Build Docker image from dev branch
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
       - dev
       
 jobs:
-  docker:
+  bulid dev:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout (dev)
         uses: actions/checkout@v2.3.4
         with:
           repository: 'buanet/docker.watchdog'
@@ -96,5 +96,4 @@ jobs:
           
       - name: Log
         run: docker images
-        
-          
+  
