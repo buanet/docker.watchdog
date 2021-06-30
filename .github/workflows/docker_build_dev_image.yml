@@ -8,7 +8,7 @@ on:
       - dev
       
 jobs:
-  bulid dev:
+  bulid_dev:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout (dev)
