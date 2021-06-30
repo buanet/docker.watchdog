@@ -1,6 +1,6 @@
 FROM balenalib/aarch64-alpine:latest
 
-LABEL org.opencontainers.image.source https://github.com/buanet/docker.watchdog
+# LABEL org.opencontainers.image.source https://github.com/buanet/docker.watchdog
 
 # Install prerequisites
 RUN apk add --no-cache curl jq nano tzdata
