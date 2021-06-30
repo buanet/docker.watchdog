@@ -1,0 +1,18 @@
+# Github action to build Docker image from beta branch (tag: beta)
+
+name: Build Docker image from beta branch
+
+on:
+  push:
+    branches:
+      - beta
+      
+jobs:
+  bulid_beta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (beta)
+        uses: actions/checkout@v2.3.4
+        with:
+          repository: 'buanet/docker.watchdog'
+          ref: 'beta'
