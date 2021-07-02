@@ -100,3 +100,23 @@ jobs:
           cat ./ghcr_manifest_temp.yaml | sed "s/\$DOCKERTAG/dev/g" > ghcr_manifest_dev.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec ghcr_manifest_dev.yaml
           
+      - name: Delete untagged images from GitHub packages
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.PACKAGES_PASS }}
+          script: |
+            const response = await github.request("GET /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
+              { per_page: ${{ env.PER_PAGE }}
+            });
+            for(version of response.data) {
+                if (version.metadata.container.tags.length == 0) {
+                    console.log("delete " + version.id)
+                    const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
+                    console.log("status " + deleteResponse.status)
+                }
+            }
+        env:
+          OWNER: buanet
+          PACKAGE_NAME: watchdog
+          PER_PAGE: 100
+          
