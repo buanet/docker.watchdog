@@ -87,8 +87,8 @@ jobs:
           platforms: linux/arm64
           tags: ghcr.io/buanet/watchdog:testing-arm64v8
           
-      - name: Create and push manifest
-        run: |
-          cat ./ghcr_manifest.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
-          cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
-          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_testing.yaml
+#      - name: Create and push manifest
+#        run: |
+#          cat ./ghcr_manifest.yml | sed "s/\$VERSION/testing/g" > manifest_temp.yaml
+#          cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/testing/g" > manifest_testing.yaml
+#          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_testing.yaml
