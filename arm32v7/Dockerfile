@@ -1,5 +1,6 @@
 FROM balenalib/armv7hf-alpine:latest
 
+LABEL maintainer="info@buanet.de"
 LABEL org.opencontainers.image.source https://github.com/buanet/docker.watchdog
 
 # Install prerequisites
