@@ -1,6 +1,6 @@
 # Github action to build Docker image from dev branch (tag: testing)
 
-name: Build Docker image from dev branch
+name: Build Docker image from dev
 
 on:
   push:
