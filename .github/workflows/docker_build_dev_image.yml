@@ -63,8 +63,8 @@ jobs:
           push: true
           load: false
           platforms: linux/amd64
-          tags:
-            buanet/watchdog:dev-amd64
+          tags: |
+            buanet/watchdog:dev-amd64,
             ghcr.io/buanet/watchdog:dev-amd64
           
       - name: Build Docker image (armv32v7)
@@ -75,8 +75,8 @@ jobs:
           push: true
           load: false
           platforms: linux/arm/v7
-          tags:
-            buanet/watchdog:dev-arm32v7
+          tags: |
+            buanet/watchdog:dev-arm32v7,
             ghcr.io/buanet/watchdog:dev-arm32v7
       
       - name: Build Docker image (arm64v8)
@@ -87,8 +87,8 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags:
-            buanet/watchdog:dev-arm64v8
+          tags: |
+            buanet/watchdog:dev-arm64v8,
             ghcr.io/buanet/watchdog:dev-arm64v8
           
       - name: Create and push manifests
