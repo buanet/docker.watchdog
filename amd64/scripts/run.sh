@@ -1,19 +1,26 @@
 #!/bin/sh
 
-DOCKER_SOCK=${DOCKER_SOCK:-/var/run/docker.sock}
-CURL_TIMEOUT=${CURL_TIMEOUT:-30}
+# Reading ENV
+dockerSock=${DOCKER_SOCK:-/var/run/docker.sock}
+curlTimeout=${CURL_TIMEOUT:-30}
+watchdogContainerLabel=${WATCHDOG_CONTAINER_LABEL:=watchdog}
 
 # SIGTERM-handler
-term_handler() {
-  exit 143; # 128 + 15 -- SIGTERM
+shut_down() {
+  echo ' '
+  echo "Recived termination signal (SIGTERM) at $(date +%Y-%m-%d" "%H:%M:%S)."
+  echo "Shutting down watchdog..."
+  echo ' '
+  exit
 }
 
 docker_curl() {
-  curl --max-time "${CURL_TIMEOUT}" --no-buffer -s --unix-socket "${DOCKER_SOCK}" "$@" || return 1
+  curl --max-time "$curlTimeout" --no-buffer -s --unix-socket "$dockerSock" "$@" || return 1
   return 0
 }
 
-trap 'kill ${!}; term_handler' SIGTERM
+
+trap 'shut_down' SIGTERM
 
 # Running watchdog
 # https://docs.docker.com/engine/api/v1.25/
@@ -21,16 +28,15 @@ trap 'kill ${!}; term_handler' SIGTERM
 if [ -e /var/run/docker.sock ]
 then
   # Set container selector
-  if [ "$WATCHDOG_CONTAINER_LABEL" == "all" ]
+  if [ "$watchdogContainerLabel" == "all" ]
   then
     labelFilter=""
   else
-    labelFilter=",\"label\":\[\"${WATCHDOG_CONTAINER_LABEL:=watchdog}=true\"\]"
+    labelFilter=",\"label\":\[\"$watchdogContainerLabel=true\"\]"
   fi
 
-  WATCHDOG_START_PERIOD=${WATCHDOG_START_PERIOD:=0}
-    echo "Monitoring containers for unhealthy status $([ "${WATCHDOG_START_PERIOD}" != 0 ] && echo "in ${WATCHDOG_START_PERIOD} second(s)")"
-    sleep ${WATCHDOG_START_PERIOD}
+  echo "Watchdog will now start monitoring containers for unhealthy status."
+  echo ""
 
   while true
   do
@@ -43,14 +49,14 @@ then
     while read -r CONTAINER_ID && read -r CONTAINER_NAME && read -r TIMEOUT
     do
         CONTAINER_SHORT_ID=${CONTAINER_ID:0:12}
-        DATE=$(date +%d-%m-%Y" "%H:%M:%S)
+        DATE=$(date +%Y-%m-%d" "%H:%M:%S)
         if [ "null" = "$CONTAINER_NAME" ]
         then
-          echo "$DATE Container name of ($CONTAINER_SHORT_ID) is null, which implies container does not exist - don't restart"
+          echo "$DATE Container name of ($CONTAINER_SHORT_ID) is null, which implies container does not exist - don't restart."
         else
-          echo "$DATE Container ${CONTAINER_NAME} ($CONTAINER_SHORT_ID) found to be unhealthy - Restarting container now with ${TIMEOUT}s timeout"
+          echo "$DATE Container ${CONTAINER_NAME} ($CONTAINER_SHORT_ID) found to be unhealthy - Restarting container now with ${TIMEOUT}s timeout."
           docker_curl -f -XPOST "http://localhost/containers/${CONTAINER_ID}/restart?t=${TIMEOUT}" \
-            || echo "$DATE Restarting container $CONTAINER_SHORT_ID failed"
+            || echo "$DATE Restarting container $CONTAINER_SHORT_ID failed!"
         fi
     done
   done

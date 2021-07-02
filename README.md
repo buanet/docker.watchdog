@@ -79,6 +79,10 @@ Thank you!
 
 ## Changelog
 
+### v1.0.1_beta (2021-07-02)
+* moving auto build to github actions
+* publishing image on ghcr.io docker registry
+
 ### v1.0.0 (2020-08-18)
 * pushing beta to first stable release
 * v0.0.2beta (2020-08-17)
