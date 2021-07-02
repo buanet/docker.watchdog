@@ -14,7 +14,7 @@ jobs:
         with:
           github-token: ${{ secrets.PACKAGES_PASS }}
           script: |
-            const response = await github.request("GET /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
+            const response = await github.request("GET /users/${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
               { per_page: ${{ env.PER_PAGE }}
             });
             for(version of response.data) {
