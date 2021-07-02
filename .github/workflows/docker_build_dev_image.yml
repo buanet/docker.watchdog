@@ -24,8 +24,11 @@ jobs:
           MAJORVERSION="$(cat .VERSION | cut -c 1-2 | sed -r 's#^(.{0})#\1latest-#')"
           DATI=`date '+%y%m%d-%H%M%S'`
           echo "This is the Version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_ENV
           echo "This is the Major Version: $MAJORVERSION"
+          echo "majorversion=$MAJORVERSION" >> $GITHUB_ENV
           echo "This is the Buildnumber/Timestamp: $DATI"
+          echo "dati=$DATI" >> $GITHUB_ENV
 
       - name: Set up manifest tool
         run: |
@@ -68,7 +71,7 @@ jobs:
           push: true
           load: false
           platforms: linux/amd64
-          tags: ghcr.io/buanet/watchdog:testing-amd64,ghcr.io/buanet/watchdog:testing-amd64_${{ steps.version.outputs.dati }}
+          tags: ghcr.io/buanet/watchdog:testing-amd64,ghcr.io/buanet/watchdog:testing-amd64_${{ env.dati }}
           
       - name: Build Docker image (armv32v7)
         uses: docker/build-push-action@v2.6.1
