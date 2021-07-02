@@ -99,3 +99,4 @@ jobs:
           cat ./ghcr_manifest.yml | sed "s/\$VERSION/dev/g" > ghcr_manifest_temp.yaml
           cat ./ghcr_manifest_temp.yaml | sed "s/\$DOCKERTAG/dev/g" > ghcr_manifest_dev.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec ghcr_manifest_dev.yaml
+          
