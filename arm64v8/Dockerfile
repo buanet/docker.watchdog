@@ -1,7 +1,12 @@
 FROM balenalib/aarch64-alpine:latest
 
-LABEL maintainer="info@buanet.de"
-LABEL org.opencontainers.image.source https://github.com/buanet/docker.watchdog
+#Labeling Docker image
+LABEL org.opencontainers.image.title="Docker watchdog" \
+      org.opencontainers.image.description="Simple watchdog for monitoring container health status" \
+      org.opencontainers.image.authors="info@buanet.de" \
+      org.opencontainers.image.url="https://github.com/buanet/docker.watchdog" \
+      org.opencontainers.image.version="$VERSION" \
+      org.opencontainers.image.created="$DATI"
 
 # Install prerequisites
 RUN apk add --no-cache curl jq nano tzdata
