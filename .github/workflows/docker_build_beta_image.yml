@@ -17,18 +17,27 @@ jobs:
           repository: 'buanet/docker.watchdog'
           ref: 'beta'
 
-      - name: Get versions
+      - name: Get and wirte version and date
         id: version
         run: |
           VERSION="$(cat .VERSION)"
           MAJORVERSION="$(cat .VERSION | cut -c 1-2 | sed -r 's#^(.{0})#\1latest-#')"
-          DATI=`date '+%y%m%d-%H%M%S'`
+          DATI="$(date --rfc-3339=seconds | sed 's/ /T/')"
           echo "This is the Version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "This is the Major Version: $MAJORVERSION"
           echo "majorversion=$MAJORVERSION" >> $GITHUB_ENV
           echo "This is the Buildnumber/Timestamp: $DATI"
           echo "dati=$DATI" >> $GITHUB_ENV
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./amd64/Dockerfile > ./amd64/Dockerfile.tmp
+          mv -f ./amd64/Dockerfile.tmp ./amd64/Dockerfile
+          cat ./amd64/Dockerfile
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm32v7/Dockerfile > ./arm32v7/Dockerfile.tmp
+          mv -f ./arm32v7/Dockerfile.tmp ./arm32v7/Dockerfile
+          cat ./arm32v7/Dockerfile
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm64v8/Dockerfile > ./arm64v8/Dockerfile.tmp
+          mv -f ./arm64v8/Dockerfile.tmp ./arm64v8/Dockerfile
+          cat ./arm64v8/Dockerfile
 
       - name: Set up manifest tool
         run: |
@@ -90,12 +99,10 @@ jobs:
           
       - name: Create and push manifests
         run: |
-          cat ./manifest.yml | sed "s/\$VERSION/${{ env.version }}/g" > manifest_temp.yaml
-          cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/beta/g" > manifest_dev.yaml
-          ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_dev.yaml
-          cat ./manifest_ghcr.yml | sed "s/\$VERSION/${{ env.version }}/g" > manifest_ghcr_temp.yaml
-          cat ./manifest_ghcr_temp.yaml | sed "s/\$DOCKERTAG/beta/g" > manifest_ghcr_dev.yaml
-          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_dev.yaml
+          cat ./manifest.yml | sed -e "s/\$VERSION/${{ env.version }}/g" -e "s/\$DOCKERTAG/beta/g" > manifest_beta.yaml
+          ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_beta.yaml
+          cat ./manifest_ghcr.yml | sed -e "s/\$VERSION/${{ env.version }}/g" -e "s/\$DOCKERTAG/beta/g" > manifest_ghcr_beta.yaml
+          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_beta.yaml
           
       - name: Delete untagged images from GitHub packages
         uses: actions/github-script@v3
