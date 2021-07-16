@@ -79,7 +79,7 @@ Thank you!
 
 ## Changelog
 
-### v1.0.1-beta.1 (2021-07-09)
+### v1.0.1-beta.1 (2021-07-16)
 * adding labels in OCI standard format
 * v1.0.1-beta (2021-07-02)
   * moving auto build to github actions
