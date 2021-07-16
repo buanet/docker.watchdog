@@ -32,6 +32,7 @@ jobs:
           sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./amd64/Dockerfile > ./amd64/Dockerfile.tmp
           cat ./amd64/Dockerfile.tmp
           mv -f ./amd64/Dockerfile.tmp ./amd64/Dockerfile
+          cat ./amd64/Dockerfile
           sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm32v7/Dockerfile > ./arm32v7/Dockerfile.tmp
           sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm64v8/Dockerfile > ./arm64v8/Dockerfile.tmp
 
