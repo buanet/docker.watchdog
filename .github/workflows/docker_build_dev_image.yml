@@ -33,7 +33,11 @@ jobs:
           mv -f ./amd64/Dockerfile.tmp ./amd64/Dockerfile
           cat ./amd64/Dockerfile
           sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm32v7/Dockerfile > ./arm32v7/Dockerfile.tmp
+          mv -f ./arm32v7/Dockerfile.tmp ./arm32v7/Dockerfile
+          cat ./arm32v7/Dockerfile
           sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm64v8/Dockerfile > ./arm64v8/Dockerfile.tmp
+          mv -f ./arm64v8/Dockerfile.tmp ./arm64v8/Dockerfile
+          cat ./arm64v8/Dockerfile
 
       - name: Set up manifest tool
         run: |
@@ -66,7 +70,6 @@ jobs:
           context: ./amd64
           file: ./amd64/Dockerfile
           push: true
-          load: false
           platforms: linux/amd64
           tags: |
             buanet/watchdog:dev-amd64,
@@ -78,7 +81,6 @@ jobs:
           context: ./arm32v7
           file: ./arm32v7/Dockerfile
           push: true
-          load: false
           platforms: linux/arm/v7
           tags: |
             buanet/watchdog:dev-arm32v7,
@@ -90,7 +92,6 @@ jobs:
           context: ./arm64v8
           file: ./arm64v8/Dockerfile
           push: true
-          load: false
           platforms: linux/arm64
           tags: |
             buanet/watchdog:dev-arm64v8,
