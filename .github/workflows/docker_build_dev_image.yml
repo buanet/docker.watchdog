@@ -17,7 +17,7 @@ jobs:
           repository: 'buanet/docker.watchdog'
           ref: 'dev'
         
-      - name: Get versions
+      - name: Get and wirte version and date
         id: version
         run: |
           VERSION="$(cat .VERSION)"
@@ -29,6 +29,9 @@ jobs:
           echo "majorversion=$MAJORVERSION" >> $GITHUB_ENV
           echo "This is the Buildnumber/Timestamp: $DATI"
           echo "dati=$DATI" >> $GITHUB_ENV
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./amd64/Dockerfile
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm32v7/Dockerfile
+          sed -e "s/\${VERSION}/$VERSION-devbuild/" -e "s/\${DATI}/$DATI/" ./arm64v8/Dockerfile
 
       - name: Set up manifest tool
         run: |
@@ -93,11 +96,9 @@ jobs:
           
       - name: Create and push manifests
         run: |
-          cat ./manifest.yml | sed "s/\$VERSION/dev/g" > manifest_temp.yaml
-          cat ./manifest_temp.yaml | sed "s/\$DOCKERTAG/dev/g" > manifest_dev.yaml
+          cat ./manifest.yml | sed -e "s/\$VERSION/dev/g" -e "s/\$DOCKERTAG/dev/g" > manifest_dev.yaml
           ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_dev.yaml
-          cat ./manifest_ghcr.yml | sed "s/\$VERSION/dev/g" > manifest_ghcr_temp.yaml
-          cat ./manifest_ghcr_temp.yaml | sed "s/\$DOCKERTAG/dev/g" > manifest_ghcr_dev.yaml
+          cat ./manifest_ghcr.yml | sed -e "s/\$VERSION/dev/g" -e "s/\$DOCKERTAG/dev/g" > manifest_ghcr_dev.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_dev.yaml
           
       - name: Delete untagged images from GitHub packages
