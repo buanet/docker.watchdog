@@ -1,18 +1,18 @@
-image: buanet/watchdog:$DOCKERTAG
+image: buanet/watchdog:${DOCKERTAG}
 manifests:
   -
-    image: buanet/watchdog:$VERSION-amd64
+    image: buanet/watchdog:${VERSION}-amd64
     platform:
       architecture: amd64
       os: linux
   -
-    image: buanet/watchdog:$VERSION-arm64v8
+    image: buanet/watchdog:${VERSION}-arm64v8
     platform:
       architecture: arm64
       variant: v8
       os: linux
   -
-    image: buanet/watchdog:$VERSION-arm32v7
+    image: buanet/watchdog:${VERSION}-arm32v7
     platform:
       architecture: arm
       variant: v7
