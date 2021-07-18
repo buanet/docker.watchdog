@@ -79,8 +79,9 @@ Thank you!
 
 ## Changelog
 
-### v1.0.1-beta.1 (2021-07-16)
-* adding labels in OCI standard format
+### v1.0.1 (2021-07-18)
+* v1.0.1-beta.1 (2021-07-16)
+  * adding labels in OCI standard format
 * v1.0.1-beta (2021-07-02)
   * moving auto build to github actions
   * publishing image on ghcr.io docker registry
