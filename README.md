@@ -1,8 +1,9 @@
-# Watchdog for Docker
+# Simple watchdog for Docker
 
 [![Source](https://img.shields.io/badge/source-github-blue)](https://github.com/buanet/docker.watchdog)
 [![Release](https://img.shields.io/github/v/release/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/releases)
-[![Github Issues](https://img.shields.io/github/issues/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/issues)<br>
+[![Github Issues](https://img.shields.io/github/issues/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/issues)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/buanet/docker.watchdog/Build%20Docker%20image%20from%20main)](https://github.com/buanet/docker.watchdog/actions/workflows/docker_build_main_image.yml)<br>
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/buanet/watchdog/latest)](https://hub.docker.com/repository/docker/buanet/watchdog)
 [![Docker Pulls](https://img.shields.io/docker/pulls/buanet/watchdog)](https://hub.docker.com/repository/docker/buanet/watchdog)
 [![Docker Stars](https://img.shields.io/docker/stars/buanet/watchdog)](https://hub.docker.com/repository/docker/buanet/watchdog)<br>
