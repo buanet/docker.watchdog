@@ -3,15 +3,13 @@
 name: Build Docker image from main
 
 on:
-  push:
-    branches:
-      - main
+  release:
       
 jobs:
-  bulid_beta:
+  bulid_latest:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (beta)
+      - name: Checkout (main)
         uses: actions/checkout@v2.3.4
         with:
           repository: 'buanet/docker.watchdog'
