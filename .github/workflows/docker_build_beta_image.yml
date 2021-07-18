@@ -3,7 +3,7 @@
 name: Build Docker image from beta
 
 on:
-  push:
+  pull_request:
     branches:
       - beta
       
@@ -17,7 +17,7 @@ jobs:
           repository: 'buanet/docker.watchdog'
           ref: 'beta'
 
-      - name: Get and wirte version and date
+      - name: Get and write version and date
         id: version
         run: |
           VERSION="$(cat .VERSION)"
@@ -99,9 +99,9 @@ jobs:
           
       - name: Create and push manifests
         run: |
-          cat ./manifest.yml | sed -e "s/\$VERSION/${{ env.version }}/g" -e "s/\$DOCKERTAG/beta/g" > manifest_beta.yaml
+          cat ./manifest.yml | sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/beta/g" > manifest_beta.yaml
           ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_beta.yaml
-          cat ./manifest_ghcr.yml | sed -e "s/\$VERSION/${{ env.version }}/g" -e "s/\$DOCKERTAG/beta/g" > manifest_ghcr_beta.yaml
+          cat ./manifest_ghcr.yml | sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/beta/g" > manifest_ghcr_beta.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_beta.yaml
           
       - name: Delete untagged images from GitHub packages
