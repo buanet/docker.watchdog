@@ -4,6 +4,8 @@ name: Build Docker image from main
 
 on:
   release:
+    types:
+      - published
       
 jobs:
   bulid_latest:
