@@ -1,4 +1,4 @@
-# Simple watchdog for Docker
+# Simple Watchdog for Docker
 
 [![Source](https://img.shields.io/badge/source-github-blue)](https://github.com/buanet/docker.watchdog)
 [![Release](https://img.shields.io/github/v/release/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/releases)
@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/github/license/buanet/docker.watchdog)](https://github.com/buanet/docker.watchdog/blob/master/LICENSE.md)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue)](https://paypal.me/buanet)
 
-Watchdog for Docker is a Docker image which provides (at the moment) just a simple watchdog to automatically restart unhealthy containers. Some more functions to monitor your containers will follow.
+Simple Watchdog for Docker is a Docker image which provides (at the moment) just a simple watchdog to automatically restart unhealthy containers. Some more functions to monitor your containers will follow.
 
 ## Getting started
 
@@ -47,6 +47,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
+### Available Docker Tags
+
+All Docker Tags without an architecture ending (like vX.X.X-amd64) are valid for the following architectures: amd64, arm32v7, arm64v8.
+
+|Tag|Description|
+|---|---|
+|latest|Always the latest stable version|
+|vX.X.X,<br>vX.X.X-[arch]|Specific stable version|
+|beta|Always the latest beta version
+|vX.X.X-beta,<br>vX.X.X-beta-[arch]|Specific beta version|
+|dev|Always the latest development version. Might be unstable and contain undocumented features. Simply don't use it. ;)
+
+
+
 ## Special settings and features
 
 The following will give a short overview.
@@ -79,6 +93,10 @@ And if you want to buy me a beer instead, you can do this here: <a href="https:/
 Thank you!
 
 ## Changelog
+
+### v1.0.2-beta (2021-07-19)
+* added docker tag for version
+* updated readme.md
 
 ### v1.0.1 (2021-07-18)
 * v1.0.1-beta.1 (2021-07-16)

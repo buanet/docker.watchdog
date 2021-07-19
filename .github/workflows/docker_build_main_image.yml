@@ -100,11 +100,15 @@ jobs:
           ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_latest.yaml
           sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.majorversion }}/g" ./manifest.yml > manifest_latestmajor.yaml
           ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_latestmajor.yaml
+          sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.version }}/g" ./manifest.yml > manifest_version.yaml
+          ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_version.yaml
           sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/latest/g" ./manifest_ghcr.yml > manifest_ghcr_latest.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_latest.yaml
           sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.majorversion }}/g" ./manifest_ghcr.yml > manifest_ghcr_latestmajor.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_latestmajor.yaml
-          
+          sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.version }}/g" ./manifest_ghcr.yml > manifest_ghcr_version.yaml
+          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_version.yaml
+
       - name: Delete untagged images from GitHub packages
         uses: actions/github-script@v3
         with:

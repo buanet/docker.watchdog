@@ -102,7 +102,11 @@ jobs:
           ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_beta.yaml
           sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/beta/g" ./manifest_ghcr.yml > manifest_ghcr_beta.yaml
           ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_beta.yaml
-          
+          sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.version }}/g" ./manifest.yml > manifest_version.yaml
+          ./manifest-tool --username ${{ secrets.DOCKER_USER }} --password ${{ secrets.DOCKER_PASS }} push from-spec manifest_version.yaml
+          sed -e "s/\${VERSION}/${{ env.version }}/g" -e "s/\${DOCKERTAG}/${{ env.version }}/g" ./manifest_ghcr.yml > manifest_ghcr_version.yaml
+          ./manifest-tool --username ${{ secrets.PACKAGES_USER }} --password ${{ secrets.PACKAGES_PASS }} push from-spec manifest_ghcr_version.yaml
+
       - name: Delete untagged images from GitHub packages
         uses: actions/github-script@v3
         with:
